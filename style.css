@@ -1,0 +1,18 @@
+.linkbox {
+	/* color: #FFFFFF; */
+	text-decoration: none;
+	float: left;
+}
+
+.linkbox>div {
+	cursor: pointer;
+	height: 150px;
+	width: 150px;
+	background-color: aqua;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 48px;
+	color: black;
+	margin: 10px;
+}
