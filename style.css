@@ -6,13 +6,13 @@
 
 .linkbox>div {
 	cursor: pointer;
-	height: 150px;
-	width: 150px;
+	height: 400px;
+	width: 400px;
 	background-color: aqua;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	font-size: 48px;
+	font-size: 72px;
 	color: black;
 	margin: 10px;
 }
