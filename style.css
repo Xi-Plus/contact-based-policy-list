@@ -4,15 +4,24 @@
 	float: left;
 }
 
-.linkbox>div {
+.corebox {
 	cursor: pointer;
 	height: 400px;
 	width: 400px;
-	background-color: aqua;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	text-align: center;
 	font-size: 72px;
-	color: black;
 	margin: 10px;
+}
+
+.formbox {
+	color: black;
+	background-color: aqua;
+}
+
+.smsbox {
+	color: black;
+	background-color: greenyellow;
 }
