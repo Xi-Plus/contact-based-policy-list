@@ -101,8 +101,8 @@ export default {
 
         const options = {
           enableHighAccuracy: true,
-          maximumAge: 30000,
-          timeout: 27000,
+          maximumAge: 5000,
+          timeout: 30000,
         };
         navigator.geolocation.getCurrentPosition(success, error, options);
       }
