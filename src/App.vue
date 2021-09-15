@@ -84,6 +84,17 @@ export default {
       return flattenArray;
     },
   },
+  created() {
+    if (navigator.permissions) {
+      navigator.permissions
+        .query({ name: 'geolocation' })
+        .then((result)=>{
+          if (result.state === 'granted') {
+            this.useGPS();
+          }
+        });
+    }
+  },
   methods: {
     useGPS() {
       if (!navigator.geolocation) {
