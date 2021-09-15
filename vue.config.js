@@ -1,5 +1,5 @@
 module.exports = {
 	publicPath: process.env.NODE_ENV === 'production'
-		? '/contact-based-policy-list/dist/'
+		? '/contact-based-policy-list/'
 		: '/',
 }
