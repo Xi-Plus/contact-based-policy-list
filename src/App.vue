@@ -2,25 +2,22 @@
   <h2>陽明交大光復校區實聯制常用連結 v{{ appVersion }}</h2>
   <div>
     如有錯誤、缺漏、其他建議請在<a
-      href="https://github.com/Xi-Plus/contact-based-policy-list/issues"
-      target="_blank"
+href="https://github.com/Xi-Plus/contact-based-policy-list/issues"
+target="_blank"
       >Github</a
     >、 <a href="http://t.me/xiplus" target="_blank">Telegram</a>、<a
-      href="http://m.me/xiplus.dev"
+href="http://m.me/xiplus.dev"
       >Facebook Messenger</a
     >回報。
   </div>
   <div>
-    <div
-      class="linkbox corebox"
-      style="background-color: #00ffff"
-      @click="useGPS"
-    >
+    <div class="linkbox corebox" style="background-color: #00ffff" @click="useGPS">
       <div>GPS定位</div>
       <div v-if="gpsStatus"><br />{{ gpsStatus }}</div>
       <div v-if="userCoords">
-        <span style="font-size: 50px">目前位置</span><br>
-        <span style="font-size: 60px">{{ userCoords.latitude.toFixed(7) }}</span><br>
+        <span style="font-size: 50px">目前位置</span><br />
+        <span style="font-size: 60px">{{ userCoords.latitude.toFixed(7) }}</span
+        ><br />
         <span style="font-size: 60px">{{ userCoords.longitude.toFixed(7) }}</span>
       </div>
     </div>
@@ -34,9 +31,9 @@
 </template>
 
 <script>
-import { getDistance } from 'geolib';
-import SmsCard from './components/SmsCard.vue';
-import positions from './data.js';
+import { getDistance } from 'geolib'
+import SmsCard from './components/SmsCard.vue'
+import positions from './data.js'
 
 export default {
   components: { SmsCard },
@@ -46,7 +43,7 @@ export default {
       gpsStatus: '',
       positions: positions,
       userCoords: null,
-    };
+    }
   },
   computed: {
     appVersion() {
@@ -54,76 +51,77 @@ export default {
     },
     sortedPositions() {
       if (this.userCoords === null) {
-        return positions;
+        return positions
       }
       var res = this.positions.map((pos) => {
-        pos.distance = getDistance(pos.coords, this.userCoords);
-        return pos;
-      });
-      res.sort((a, b)=> {
-        return a.distance - b.distance;
-      });
-      return res;
+        pos.distance = getDistance(pos.coords, this.userCoords)
+        return pos
+      })
+      res.sort((a, b) => {
+        return a.distance - b.distance
+      })
+      return res
     },
     flattenPositions() {
-      var flattenArray = [];
+      var flattenArray = []
       for (const position of this.sortedPositions) {
         flattenArray.push({
           text: position.text,
           sms: position.sms,
-        });
+        })
         if (position.subPositions) {
           for (const subPosition of position.subPositions) {
             flattenArray.push({
               text: subPosition.text,
               sms: subPosition.sms,
-            });
+            })
           }
         }
       }
-      return flattenArray;
+      return flattenArray
     },
   },
   created() {
     if (navigator.permissions) {
-      navigator.permissions
-        .query({ name: 'geolocation' })
-        .then((result)=>{
-          if (result.state === 'granted') {
-            this.useGPS();
-          }
-        });
+      navigator.permissions.query({ name: 'geolocation' }).then((result) => {
+        if (result.state === 'granted') {
+          this.useGPS()
+        }
+      })
     }
   },
   methods: {
     useGPS() {
       if (!navigator.geolocation) {
-        this.gpsStatus = '您目前使用的瀏覽器不支援定位';
+        this.gpsStatus = '您目前使用的瀏覽器不支援定位'
       } else {
-        this.gpsStatus = '定位中...';
+        this.gpsStatus = '定位中...'
 
-        let self = this;
+        const self = this
 
-        var success = function(position) {
-          self.userCoords = { latitude: position.coords.latitude, longitude: position.coords.longitude };
-          self.gpsStatus = '';
-        };
+        var success = function (position) {
+          self.userCoords = {
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+          }
+          self.gpsStatus = ''
+        }
 
-        var error = function() {
-          self.gpsStatus = '定位失敗';
+        var error = function () {
+          self.gpsStatus = '定位失敗'
           // self.userCoords = { latitude: 24.787618, longitude: 120.997957 };
-        };
+        }
 
         const options = {
           enableHighAccuracy: true,
           maximumAge: 5000,
           timeout: 30000,
-        };
-        navigator.geolocation.getCurrentPosition(success, error, options);
+        }
+        navigator.geolocation.getCurrentPosition(success, error, options)
       }
     },
   },
-};
+}
 </script>
 
 <style>
