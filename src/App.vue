@@ -1,4 +1,5 @@
 <template>
+  <h2>陽明交大光復校區實聯制常用連結 v{{ appVersion }}</h2>
   <div>
     如有錯誤、缺漏、其他建議請在<a
       href="https://github.com/Xi-Plus/contact-based-policy-list/issues"
@@ -48,6 +49,9 @@ export default {
     };
   },
   computed: {
+    appVersion() {
+      return process.env.VUE_APP_VERSION
+    },
     sortedPositions() {
       if (this.userCoords === null) {
         return positions;
