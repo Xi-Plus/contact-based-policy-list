@@ -29,7 +29,6 @@
       v-bind:message="position.sms"
       v-bind:text="position.text"
     ></sms-card>
-    {{ sortedPositions }}
   </div>
 </template>
 
