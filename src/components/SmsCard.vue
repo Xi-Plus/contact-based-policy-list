@@ -1,6 +1,9 @@
 <template>
-  <a class="linkbox" :href="fullMessage">
-    <div class="corebox smsbox">{{ text }}</div>
+  <a class="linkbox" :href="fullSms">
+    <div class="corebox smsbox">
+      <div>{{ position.text }}</div>
+      <div v-if="position.distance" style="font-size: 36px">距離約 {{ position.distance }}m</div>
+    </div>
   </a>
 </template>
 
@@ -8,12 +11,20 @@
 export default {
   name: 'SmsCard',
   props: {
-    text: String,
-    message: String,
+    position: {
+      type: Object,
+      default: function () {
+        return {
+          text: '',
+          sms: '',
+          distance: null,
+        }
+      },
+    },
   },
   computed: {
-    fullMessage() {
-      return 'sms:1922?body=' + this.message.replaceAll('\n', '%0A')
+    fullSms() {
+      return 'sms:1922?body=' + this.position.sms.replaceAll('\n', '%0A')
     },
   },
 }

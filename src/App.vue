@@ -24,8 +24,7 @@ href="http://m.me/xiplus.dev"
     <sms-card
       v-for="position in flattenPositions"
       v-bind:key="position.text"
-      v-bind:message="position.sms"
-      v-bind:text="position.text"
+      v-bind:position="position"
     ></sms-card>
   </div>
 </template>
@@ -51,7 +50,10 @@ export default {
     },
     sortedPositions() {
       if (this.userCoords === null) {
-        return positions
+        return this.positions.map((pos) => {
+          pos.distance = null
+          return pos
+        })
       }
       var res = this.positions.map((pos) => {
         pos.distance = getDistance(pos.coords, this.userCoords)
@@ -65,16 +67,10 @@ export default {
     flattenPositions() {
       var flattenArray = []
       for (const position of this.sortedPositions) {
-        flattenArray.push({
-          text: position.text,
-          sms: position.sms,
-        })
+        flattenArray.push(position)
         if (position.subPositions) {
           for (const subPosition of position.subPositions) {
-            flattenArray.push({
-              text: subPosition.text,
-              sms: subPosition.sms,
-            })
+            flattenArray.push(subPosition)
           }
         }
       }
@@ -135,6 +131,7 @@ export default {
   height: 400px;
   width: 400px;
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
