@@ -24,7 +24,7 @@ export default {
   },
   computed: {
     fullSms() {
-      return 'sms:1922?body=' + this.position.sms.replaceAll('\n', '%0A')
+      return 'sms:1922?body=' + this.position.sms.replace(/\n/g, '%0A')
     },
   },
 }
