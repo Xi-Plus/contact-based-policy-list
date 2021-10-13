@@ -110,7 +110,7 @@ export default {
 
         const options = {
           enableHighAccuracy: true,
-          maximumAge: 5000,
+          maximumAge: 0,
           timeout: 30000,
         }
         navigator.geolocation.getCurrentPosition(success, error, options)
