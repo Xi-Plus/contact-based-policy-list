@@ -1,5 +1,5 @@
 <template>
-  <h2>陽明交大光復校區實聯制常用連結 <a href="https://github.com/Xi-Plus/contact-based-policy-list#Updates">v{{ appVersion }}</a></h2>
+  <h2>陽明交大光復校區實聯制常用連結 <a href="https://github.com/Xi-Plus/contact-based-policy-list#updates" target="_blank">v{{ appVersion }}</a></h2>
   <div>
     如有錯誤、缺漏、其他建議請在<a
 href="https://github.com/Xi-Plus/contact-based-policy-list/issues"
